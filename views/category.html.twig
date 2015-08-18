@@ -9,10 +9,14 @@
             <p>Here are all your tasks:</p>
             <ul>
                 {% for task in tasks %}
-                    <li>{{ task.getDescription }}</li>
+                    <li>Task: {{ task.getDescription }} Due: {{ task.getDueDate }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
+
+        <form action='/delete_tasks' method='post'>
+            <button type='submit'>delete</button>
+        </form>
 
         <h4>Add a task</h4>
 

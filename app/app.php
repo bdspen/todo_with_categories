@@ -53,7 +53,7 @@
 
     $app->post("/delete_tasks", function() use ($app) {
         Task::deleteAll();
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('delete_tasks.html.twig');
     });
 
     $app->post("/categories", function() use ($app) {
@@ -64,7 +64,7 @@
 
     $app->post("/delete_categories", function() use ($app) {
         Category::deleteAll();
-        return $app['twig']->render('index.html.twig');
+        return $app['twig']->render('delete_tasks.html.twig');
     });
 
     return $app;

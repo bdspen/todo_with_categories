@@ -12,21 +12,22 @@
             <input id="name" name="name" type="text">
 
             <button type="submit">Add category</button>
-        </form
+        </form>
 
         {% if categories is not empty %}
             <p>Here are all your categories:</p>
             <ul>
                 {% for category in categories %}
                     <li><a href="/categories/{{ category.getID }}">{{ category.getName }}</a></li>
-                    <form action='/delete_tasks' method='post'>
-                        <button type='submit'>delete</button>
-                    </form>
+
                 {% endfor %}
             </ul>
-            {% else %}
-                <p>There are no categories yet!</p>
-            {% endif %}
+        {% else %}
+            <p>There are no categories yet!</p>
+        {% endif %}
+            <form action='/delete_categories' method='post'>
+                <button type='submit'>delete</button>
+            </form>
 
     </body>
 </html>
