@@ -3,7 +3,14 @@
     require_once __DIR__."/../src/Task.php";
     require_once __DIR__."/../src/Category.php";
 
+    //DEBUG!
+    //Add symfony debug component and turn it on.
+    use Symfony\Component\Debug\Debug;
+    Debug::enable();
+
     $app = new Silex\Application();
+    //more debug
+    $app['debug'] = true;
 
     $server = 'mysql:host=localhost;dbname=to_do';
     $username = 'root';

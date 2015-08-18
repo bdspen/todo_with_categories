@@ -18,6 +18,7 @@
       protected function tearDown()
       {
           Task::deleteAll();
+          Category::deleteAll();
       }
 
 
@@ -41,7 +42,7 @@
       $result = Task::getAll();
       $this->assertEquals($test_task, $result[0]);
 
-        }
+      }
 
     function test_getAll()
     {
@@ -102,11 +103,11 @@
 
         $description = "Wash the dog";
         $category_id = $test_category->getId();
-        $test_Task = new Task($description, $id, $category_id);
+        $test_task = new Task($description, $id, $category_id);
         $test_task->save();
 
         //Act
-        $result = $test_Task->getId();
+        $result = $test_task->getId();
 
         //Assert
         $this->assertEquals(true, is_numeric($result));
@@ -122,11 +123,11 @@
 
         $description = "Wash the dog";
         $category_id = $test_category->getId();
-        $test_Task = new Task($description, $id, $category_id);
+        $test_task = new Task($description, $id, $category_id);
         $test_task->save();
 
         //Act
-        $result = $test_Task->getCategoryId();
+        $result = $test_task->getCategoryId();
 
         //Assert
         $this->assertEquals(true, is_numeric($result));
@@ -142,12 +143,12 @@
 
         $description = "Wash the dog";
         $category_id = $test_category->getId();
-        $test_Task = new Task($description, $id, $category_id);
+        $test_task = new Task($description, $id, $category_id);
         $test_task->save();
 
         $description2 = "Water the lawn";
-        $test_Task2 = new Task($description2, $id, $category_id);
-        $test_Task2->save();
+        $test_task2 = new Task($description2, $id, $category_id);
+        $test_task2->save();
 
         //Act
         $result = Task::find($test_task->getId());
