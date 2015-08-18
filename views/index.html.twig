@@ -1,33 +1,39 @@
 <html>
     <head>
         <title>To Do List</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
     </head>
     <body>
-        <h1>Welcome to To Do List</h1>
+        <div class='container'>
+            <h1>To Do List</h1>
 
-        <p>Create a new category:</p>
+            <p>Create a new category:</p>
 
-        <form action="/categories" method="post">
-            <label for="name">Category name:</label>
-            <input id="name" name="name" type="text">
+            <form action="/categories" method="post">
+                <div class ='form-group'>
+                    <label for="name"></label>
+                    <input id="name" class='form-control' placeholder='Category name' name="name" type="text">
 
-            <button type="submit">Add category</button>
-        </form>
-
-        {% if categories is not empty %}
-            <p>Here are all your categories:</p>
-            <ul>
-                {% for category in categories %}
-                    <li><a href="/categories/{{ category.getID }}">{{ category.getName }}</a></li>
-
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>There are no categories yet!</p>
-        {% endif %}
-            <form action='/delete_categories' method='post'>
-                <button type='submit'>delete</button>
+                    <button type="submit" class='btn btn-success'>Add category</button>
+                </div>
             </form>
+
+            {% if categories is not empty %}
+                <p>Your categories:</p>
+                <ul>
+                    {% for category in categories %}
+                        <li><a href="/categories/{{ category.getID }}">{{ category.getName }}</a></li>
+
+                    {% endfor %}
+                </ul>
+                <form action='/delete_categories' method='post'>
+                    <button type='submit' class='btn btn-danger'>delete all categories</button>
+                </form>
+            {% else %}
+                <p>There are no categories yet!</p>
+            {% endif %}
+        </div>
 
     </body>
 </html>
