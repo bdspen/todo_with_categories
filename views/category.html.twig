@@ -20,7 +20,10 @@
             <input id='category_id' name="category_id" type="hidden" value="{{ category.getId()}}">
 
             <label for='description'>Task Description</label>
-            <input type='description' name='description' type='text'>
+            <input id='description' name='description' type='text'>
+
+            <label for='due_date'></label>
+            <input type='text' placeholder='Due Date:'name='due_date' id="due_date">
 
             <button type='submit'>Add Task</button>
         </form>
