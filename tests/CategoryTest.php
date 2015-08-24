@@ -158,18 +158,19 @@
           $test_category = new Category($name, $id);
           $test_category->save();
 
-          $name2 ="Home stuff";
+          $description ="File reports";
           $id2 = 2;
-          $test_category2 = new Category($name2, $id2);
+          $due_date = '2015-01-01';
+          $test_task = new Task($description, $id2, $due_date);
           $test_task->save();
 
           //Act
-          $test_category->addTask($test_task);
-          $test_category->delete();
+          $test_task->addCategory($test_category);
+          $test_task->delete();
 
 
           //Assert
-          $this->assertEquals([], $test_task->getCategories());
+          $this->assertEquals([], $test_category->getTasks());
         }
         function testAddTask()
         {
@@ -182,7 +183,7 @@
 
           $description = "File reports";
           $id2 = 2;
-          $due_date = '2015-01-01';
+          $due_date = '2015-01-02';
           $test_task = new Task($description, $id2, $due_date);
           $test_task->save();
 
@@ -210,7 +211,7 @@
             $description2 = "Take out the trash";
             $id3 = 3;
             $due_date2 = '2015-01-01';
-            $test_task2 = new Task($description2, $id3, $due_date2);
+            $test_task2 = new Task($description2, $id3,$due_date2);
             $test_task2->save();
 
             //Act

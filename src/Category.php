@@ -41,6 +41,7 @@
         function delete()
         {
           $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
+          $GLOBALS['DB']->exec("DELETE FROM categories_tasks WHERE category_id = {$this->getId()};");
         }
 
         static function getAll()
@@ -74,9 +75,9 @@
                 $returned_task = $result->fetchAll(PDO::FETCH_ASSOC);
 
                 $description = $returned_task[0]['description'];
-                $due_date = $returned_task[0]['due_date'];
                 $id = $returned_task[0]['id'];
-                $new_task = new Task($description, $due_date, $id);
+                $due_date = $returned_task[0]['due_date'];
+                $new_task = new Task($description,$id, $due_date);
                 array_push($tasks, $new_task);
             }
             return $tasks;

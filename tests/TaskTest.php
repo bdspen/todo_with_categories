@@ -132,11 +132,14 @@
     $test_task = new Task($description, $due_date, $id);
     $test_task->save();
 
+    $new_description = "Clean the dog";
+    $new_due_date = '2015-02-01';
+
     //Act
-    $test_task->delete();
+    $test_task->update($new_description, $new_due_date);
 
     //Assert
-    $this->assertEquals([$test_task], Task::getAll());
+    $this->assertEquals("Clean the dog", $test_task->getDescription());
     }
     // function testDeleteTask()
     // {
@@ -152,7 +155,7 @@
     //   $due_date2 = '2015-01-01';
     //   $test_task2 = new Task($description2, $due_date2, $id2);
     //   $test_task2->save();
-    // 
+    //
     //   //Act
     //   $test_task->delete();
     //
@@ -170,7 +173,8 @@
 
         $description = "File reports";
         $id2 = 2;
-        $test_task = new Task($description, $id2);
+        $due_date = '2015-01-01';
+        $test_task = new Task($description, $id2, $due_date);
         $test_task->save();
 
         //Act
