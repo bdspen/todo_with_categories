@@ -138,26 +138,47 @@
     //Assert
     $this->assertEquals([$test_task], Task::getAll());
     }
-    function testDeleteTask()
+    // function testDeleteTask()
+    // {
+    //   //Arrange
+    //   $description = "Wash the dog";
+    //   $id = 1;
+    //   $due_date = '2015-01-01';
+    //   $test_task = new Task($description, $due_date, $id);
+    //   $test_task->save();
+    //
+    //   $description2 = "Water the lawn";
+    //   $id2 = 2;
+    //   $due_date2 = '2015-01-01';
+    //   $test_task2 = new Task($description2, $due_date2, $id2);
+    //   $test_task2->save();
+    // 
+    //   //Act
+    //   $test_task->delete();
+    //
+    //   //Assert
+    //   $this->assertEquals([$test_task2], Task::getAll());
+    // }
+
+    function testDelete()
     {
-      //Arrange
-      $description = "Wash the dog";
-      $id = 1;
-      $due_date = '2015-01-01';
-      $test_task = new Task($description, $due_date, $id);
-      $test_task->save();
+        //Arrange
+        $name = "Work stuff";
+        $id = 1;
+        $test_category = new Category($name, $id);
+        $test_category->save();
 
-      $description2 = "Water the lawn";
-      $id2 = 2;
-      $due_date2 = '2015-01-01';
-      $test_task2 = new Task($description2, $due_date2, $id2);
-      $test_task2->save();
+        $description = "File reports";
+        $id2 = 2;
+        $test_task = new Task($description, $id2);
+        $test_task->save();
 
-      //Act
-      $test_task->delete();
+        //Act
+        $test_task->addCategory($test_category);
+        $test_task->delete();
 
-      //Assert
-      $this->assertEquals([$test_task2], Task::getAll());
+        //Assert
+        $this->assertEquals([], $test_category->getTasks());
     }
   }
 
