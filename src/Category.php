@@ -31,6 +31,18 @@
             $this->id= $GLOBALS['DB']->lastInsertId();
         }
 
+        function update($new_name)
+        {
+          $GLOBALS['DB']->exec("UPDATE categories SET name = '{$new_name}' WHERE
+          id = {$this->getId()};");
+          $this->setName($new_name);
+        }
+
+        function delete()
+        {
+          $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
+        }
+
         static function getAll()
         {
             $returned_categories = $GLOBALS['DB']->query("SELECT * FROM categories;");
@@ -43,17 +55,28 @@
             }
             return $categories;
         }
+        function addTask($task)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id)
+            VALUES ({$this->getId()}, {$task->getId()});");
+        }
 
         function getTasks()
         {
-            $tasks = Array();
-            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()};");
-            foreach($returned_tasks as $task) {
-                $description = $task['description'];
-                $id = $task['id'];
-                $category_id = $task['category_id'];
-                $due_date = $task['due_date'];
-                $new_task = new Task($description, $id, $category_id, $due_date);
+            $query = $GLOBALS['DB']->query("SELECT task_id FROM categories_tasks
+            WHERE category_id = {$this->getId()};");
+            $task_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            $tasks = array();
+            foreach($task_ids as $id) {
+                $task_id = $id['task_id'];
+                $result = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE id = {$task_id};");
+                $returned_task = $result->fetchAll(PDO::FETCH_ASSOC);
+
+                $description = $returned_task[0]['description'];
+                $due_date = $returned_task[0]['due_date'];
+                $id = $returned_task[0]['id'];
+                $new_task = new Task($description, $due_date, $id);
                 array_push($tasks, $new_task);
             }
             return $tasks;
